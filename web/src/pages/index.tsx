@@ -6,6 +6,7 @@ import logoImg from "../assets/logo.svg";
 import userAvatarExempleImg from "../assets/avatares.png";
 import iconCheckImage from "../assets/icon-check.png";
 import { api } from "../lib/axios";
+import { GetStaticProps } from "next";
 
 interface HomeProps {
   poolCount: number;
@@ -110,7 +111,7 @@ export default function Home({ poolCount, guessCount, userCount }: HomeProps) {
   );
 }
 
-export const getServerSideProps = async () => {
+/* export const getServerSideProps = async () => {
   const [pollCountResponse, guessCountResponse, userCountResponse] =
     await Promise.all([
       api.get("pools/count"),
@@ -124,5 +125,24 @@ export const getServerSideProps = async () => {
       guessCount: guessCountResponse.data.count,
       userCount: userCountResponse.data.count,
     },
+  };
+}; */
+
+export const getStaticProps: GetStaticProps<HomeProps> = async () => {
+  const [pollCountResponse, guessCountResponse, userCountResponse] =
+    await Promise.all([
+      api.get("pools/count"),
+      api.get("guesses/count"),
+      api.get("/users/count"),
+    ]);
+
+  return {
+    props: {
+      poolCount: pollCountResponse.data.count,
+      guessCount: guessCountResponse.data.count,
+      userCount: userCountResponse.data.count,
+    },
+    // Indicando que o conteudo da pagina vai ser revalidado ou atualizado a cada 10 segundos!!
+    revalidate: 10,
   };
 };
