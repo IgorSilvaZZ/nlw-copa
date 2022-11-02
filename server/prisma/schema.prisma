@@ -11,9 +11,66 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+// Bolões
 model Pool {
-  id        String   @id @default(cuid())
+  id String @id @default(cuid())
+
   title     String
   code      String   @unique
+  ownerId   String?
   createdAt DateTime @default(now())
+
+  owner        User?         @relation(fields: [ownerId], references: [id])
+  participants Participant[]
+}
+
+// Participantes
+model Participant {
+  id     String @id @default(cuid())
+  userId String
+  poolId String
+
+  guesses Guess[]
+  user    User    @relation(fields: [userId], references: [id])
+  pool    Pool    @relation(fields: [poolId], references: [id])
+
+  @@unique([userId, poolId])
+}
+
+// Usuarios
+model User {
+  id String @id @default(cuid())
+
+  name      String
+  email     String   @unique
+  avatarUrl String?
+  createdAt DateTime @default(now())
+
+  participatingAt Participant[]
+  ownPools        Pool[]
+}
+
+// Jogos
+model Game {
+  id String @id @default(cuid())
+
+  date                  DateTime
+  firstTeamCountryCode  String
+  secundTeamCountryCode String
+
+  guesses Guess[]
+}
+
+// Palpítes
+model Guess {
+  id String @id @default(cuid())
+
+  firstTeamPoints  Int
+  secondTeamPoints Int
+  createdAt        DateTime @default(now())
+  participantId    String
+  gameId           String
+
+  participant Participant @relation(fields: [participantId], references: [id])
+  game        Game        @relation(fields: [gameId], references: [id])
 }
