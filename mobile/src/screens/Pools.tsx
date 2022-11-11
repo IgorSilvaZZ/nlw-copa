@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
+import { useState, useCallback } from "react";
 
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useFocusEffect } from "@react-navigation/native";
 
 import { VStack, Icon, useToast, FlatList } from "native-base";
 import { Octicons } from "@expo/vector-icons";
@@ -40,9 +40,11 @@ export const Pools = () => {
     }
   }
 
-  useEffect(() => {
-    fetchPools();
-  }, []);
+  useFocusEffect(
+    useCallback(() => {
+      fetchPools();
+    }, [useFocusEffect])
+  );
 
   return (
     <VStack flex={1} bgColor='gray.900'>
@@ -71,7 +73,16 @@ export const Pools = () => {
         <FlatList
           data={pools}
           keyExtractor={(item) => item.id}
-          renderItem={({ item }) => <PoolCard data={item} />}
+          renderItem={({ item }) => (
+            <PoolCard
+              data={item}
+              onPress={() =>
+                navigate("details", {
+                  id: item.id,
+                })
+              }
+            />
+          )}
           px={5}
           showsVerticalScrollIndicator={false}
           _contentContainerStyle={{
