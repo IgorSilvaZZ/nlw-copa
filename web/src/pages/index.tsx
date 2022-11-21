@@ -3,6 +3,8 @@ import { GetStaticProps } from "next";
 import { GoogleLogo } from "phosphor-react";
 import Image from "next/image";
 
+import { useAuth } from "../hooks/useAuth";
+
 import { api } from "../lib/axios";
 
 import appPreviewImg from "../assets/app-nlw-preview.png";
@@ -16,6 +18,8 @@ interface HomeProps {
 }
 
 export default function Home({ poolCount, guessCount, userCount }: HomeProps) {
+  const { signIn } = useAuth();
+
   const [poolTitle, setPoolTitle] = useState("");
 
   async function createPool(e: FormEvent) {
@@ -54,12 +58,15 @@ export default function Home({ poolCount, guessCount, userCount }: HomeProps) {
           <Image src={userAvatarExempleImg} alt='' />
 
           <strong className='text-gray-100 text-xl'>
-            <span className='text-ignite-500'>+{userCount}</span>
-            pessoas já estão usando
+            <span className='text-ignite-500'>+{userCount}</span> pessoas já
+            estão usando
           </strong>
         </div>
 
-        <button className=' w-full mt-2 bg-red-600 flex items-center justify-center text-white gap-2 px-6 py-4 rounded font-bold text-sm uppercase transition-colors hover:bg-red-700'>
+        <button
+          className=' w-full mt-2 bg-red-600 flex items-center justify-center text-white gap-2 px-6 py-4 rounded font-bold text-sm uppercase transition-colors hover:bg-red-700'
+          onClick={signIn}
+        >
           <GoogleLogo size={12} color='white' />
           <span>Entrar com Google</span>
         </button>
