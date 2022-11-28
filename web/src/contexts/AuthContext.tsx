@@ -7,6 +7,7 @@ import { api } from "../lib/axios";
 interface IUser {
   name: string;
   avatarUrl: string;
+  token: string;
 }
 
 export interface IAuthContextProps {
@@ -41,6 +42,20 @@ export const AuthContextProvider = ({ children }: IAuthProviderProps) => {
     onError: (errorResponse) => console.log(errorResponse),
   });
 
+  function loadStorage() {
+    const userInStorage = localStorage.getItem("user");
+
+    if (userInStorage) {
+      const userStorage = JSON.parse(userInStorage);
+
+      localStorage.setItem("user", JSON.stringify(userStorage));
+
+      setUser(userStorage);
+    } else {
+      router.push("/");
+    }
+  }
+
   async function signInWithGoogle(access_token: string) {
     try {
       const { data: dataToken } = await api.post("/users", { access_token });
@@ -50,7 +65,17 @@ export const AuthContextProvider = ({ children }: IAuthProviderProps) => {
       ] = `Bearer ${dataToken.token}`;
 
       const { data: dataUser } = await api.get("/me");
-      setUser(dataUser);
+
+      const userInfo = {
+        ...dataUser,
+        token: dataToken.token,
+      };
+
+      console.log(userInfo);
+
+      localStorage.setItem("user", JSON.stringify(userInfo));
+
+      setUser(userInfo);
 
       router.push("/pools");
     } catch (error) {
@@ -59,10 +84,7 @@ export const AuthContextProvider = ({ children }: IAuthProviderProps) => {
   }
 
   useEffect(() => {
-    console.log(user);
-    if (!user.name) {
-      router.push("/");
-    }
+    loadStorage();
   }, []);
 
   return (

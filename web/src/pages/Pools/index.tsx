@@ -13,7 +13,7 @@ import { Button } from "../../components/Button";
 export default function Pools() {
   const [loading, setLoading] = useState(false);
   const [pools, setPools] = useState<IPoolCardProps[]>([
-    {
+    /* {
       id: "22606651-48ae-411d-b4f7-f18790d7e9a9",
       title: "Exemple Pool",
       code: "BOL123",
@@ -157,10 +157,10 @@ export default function Pools() {
           },
         },
       ],
-    },
+    }, */
   ]);
 
-  /* async function fetchPools() {
+  async function fetchPools() {
     try {
       setLoading(true);
 
@@ -177,7 +177,11 @@ export default function Pools() {
 
   useEffect(() => {
     fetchPools();
-  }, []); */
+  }, []);
+
+  if (loading) {
+    return <Loading />;
+  }
 
   return (
     <main className='w-screen h-screen flex flex-col items-center  mx-auto bg-gray-900 overflow-y-hidden'>
@@ -185,13 +189,7 @@ export default function Pools() {
       <section className='w-[750px] h-[500px] 2xl:h-[820px] flex flex-col items-center gap-4 overflow-y-auto'>
         <Button text='Buscar Bolão por Código' />
         <div className='w-full border border-solid border-[#323238]'></div>
-        {/* <span className='w-64 text-center text-sm text-white'>
-          Você ainda não está participando de {"\n"} nenhum bolão, que tal
-          buscar um por código {"\n"} ou criar um novo?
-        </span> */}
-        {loading ? (
-          <Loading />
-        ) : (
+        {pools && pools.length > 0 ? (
           <>
             {pools.map((pool) => (
               <PoolCard
@@ -200,6 +198,13 @@ export default function Pools() {
                 onClick={() => console.log(pool.id)}
               />
             ))}
+          </>
+        ) : (
+          <>
+            <span className='w-full text-center text-sm text-white'>
+              Você ainda não está participando de {"\n"} nenhum bolão, que tal
+              buscar um por código {"\n"} ou criar um novo?
+            </span>
           </>
         )}
       </section>
