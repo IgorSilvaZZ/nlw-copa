@@ -10,6 +10,7 @@ import { MainContent } from "../../components/MainContent";
 import { IPoolCardProps, PoolCard } from "../../components/PoolCard";
 
 import { api } from "../../lib/axios";
+import { SectionContent } from "../../components/SectionContent";
 
 export default function Pools() {
   const navigate = useRouter();
@@ -47,7 +48,7 @@ export default function Pools() {
   return (
     <MainContent>
       <Header title='Meus Bolões' />
-      <section className='w-[750px] h-[500px] 2xl:h-[820px] flex flex-col items-center gap-4 overflow-y-auto'>
+      <SectionContent>
         <Button text='Buscar Bolão por Código' />
         <div className='w-full border border-solid border-[#323238]'></div>
         {pools && pools.length > 0 ? (
@@ -62,7 +63,7 @@ export default function Pools() {
           </>
         ) : (
           <>
-            <span className='w-full text-center text-xl text-white'>
+            <span className='w-full text-center text-2xl text-white'>
               Você ainda não está participando de <br /> nenhum bolão, que tal{" "}
               <span
                 className='text-yellow-500 cursor-pointer transitions-colors'
@@ -78,7 +79,7 @@ export default function Pools() {
             </span>
           </>
         )}
-      </section>
+      </SectionContent>
       <Footer />
     </MainContent>
   );

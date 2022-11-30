@@ -1,4 +1,6 @@
 import { CaretLeft, Export } from "phosphor-react";
+import { useRouter } from "next/router";
+
 import { ButtonIcon } from "../ButtonIcon";
 
 interface IHeaderProps {
@@ -14,9 +16,15 @@ export const Header = ({
   showBackButton = false,
   showShareButton = false,
 }: IHeaderProps) => {
+  const router = useRouter();
+
   return (
     <div className='w-full flex items-center justify-between bg-gray-800 p-5 mb-2'>
-      {showBackButton ? <ButtonIcon icon={CaretLeft} /> : <EmptyBox />}
+      {showBackButton ? (
+        <ButtonIcon icon={CaretLeft} onClick={() => router.back()} />
+      ) : (
+        <EmptyBox />
+      )}
       <span className='text-white text-center'>{title}</span>
       {showShareButton ? <ButtonIcon icon={Export} /> : <EmptyBox />}
     </div>
