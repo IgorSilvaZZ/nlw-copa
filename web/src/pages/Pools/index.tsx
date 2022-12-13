@@ -73,7 +73,10 @@ export default function Pools() {
               </span>
               <br />
               ou{" "}
-              <span className='text-yellow-500 cursor-pointer transitions-colors'>
+              <span
+                className='text-yellow-500 cursor-pointer transitions-colors'
+                onClick={() => goToPage("/new")}
+              >
                 criar um novo?
               </span>
             </span>
