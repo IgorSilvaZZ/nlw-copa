@@ -50,6 +50,10 @@ export const AuthContextProvider = ({ children }: IAuthProviderProps) => {
 
       localStorage.setItem("user", JSON.stringify(userStorage));
 
+      api.defaults.headers.common[
+        "Authorization"
+      ] = `Bearer ${userStorage.token}`;
+
       setUser(userStorage);
     } else {
       router.push("/");
@@ -66,12 +70,14 @@ export const AuthContextProvider = ({ children }: IAuthProviderProps) => {
 
       const { data: dataUser } = await api.get("/me");
 
+      api.defaults.headers.common[
+        "Authorization"
+      ] = `Bearer ${dataToken.token}`;
+
       const userInfo = {
         ...dataUser,
         token: dataToken.token,
       };
-
-      console.log(userInfo);
 
       localStorage.setItem("user", JSON.stringify(userInfo));
 
