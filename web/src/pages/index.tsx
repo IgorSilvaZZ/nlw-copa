@@ -1,13 +1,16 @@
 import { FormEvent, useState } from "react";
+import { GetStaticProps } from "next";
+import { GoogleLogo } from "phosphor-react";
 import Image from "next/image";
+
+import { useAuth } from "../hooks/useAuth";
+
+import { api } from "../lib/axios";
 
 import appPreviewImg from "../assets/app-nlw-preview.png";
 import logoImg from "../assets/logo.svg";
 import userAvatarExempleImg from "../assets/avatares.png";
 import iconCheckImage from "../assets/icon-check.png";
-import { api } from "../lib/axios";
-import { GetStaticProps } from "next";
-
 interface HomeProps {
   poolCount: number;
   guessCount: number;
@@ -15,6 +18,8 @@ interface HomeProps {
 }
 
 export default function Home({ poolCount, guessCount, userCount }: HomeProps) {
+  const { signIn } = useAuth();
+
   const [poolTitle, setPoolTitle] = useState("");
 
   async function createPool(e: FormEvent) {
@@ -53,31 +58,22 @@ export default function Home({ poolCount, guessCount, userCount }: HomeProps) {
           <Image src={userAvatarExempleImg} alt='' />
 
           <strong className='text-gray-100 text-xl'>
-            <span className='text-ignite-500'>+{userCount}</span>
-            pessoas já estão usando
+            <span className='text-ignite-500'>+{userCount}</span> pessoas já
+            estão usando
           </strong>
         </div>
 
-        <form onSubmit={createPool} className='mt-10 flex gap-2'>
-          <input
-            type='text'
-            required
-            placeholder='Qual nome do seu bolão'
-            className='flex-1 px-6 py-4 text-gray-100 rounded bg-gray-800 border border-gray-600 text-sm'
-            value={poolTitle}
-            onChange={(e) => setPoolTitle(e.target.value)}
-          />
-          <button
-            className='bg-yellow-500 px-6 py-4 rounded font-bold text-gray-900 text-sm uppercase transition-colors hover:bg-yellow-700'
-            type='submit'
-          >
-            Criar meu Bolão
-          </button>
-        </form>
+        <button
+          className=' w-full mt-2 bg-red-600 flex items-center justify-center text-white gap-2 px-6 py-4 rounded font-bold text-sm uppercase transition-colors hover:bg-red-700'
+          onClick={signIn}
+        >
+          <GoogleLogo size={12} color='white' />
+          <span>Entrar com Google</span>
+        </button>
 
         <p className='mt-4 text-sm text-gray-300 leading-relaxed'>
-          Após criar seu bolão, você receberá um código único que poderá usar
-          para convidar outras pessoas 🚀
+          Não utilizamos nenhuma informação além do seu e-mail para criação de
+          sua conta. 🚀
         </p>
 
         <div className='mt-10 pt-10 border-t border-gray-600 flex justify-between items-center text-gray-100'>

@@ -11,12 +11,12 @@ export default function Document() {
           crossOrigin=''
         />
         <link
-          href='https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap'
+          href='https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap'
           rel='stylesheet'
         />
       </Head>
 
-      <body className='bg-gray-900 bg-app bg-no-repeat bg-cover'>
+      <body className='bg-gray-900 bg-app bg-no-repeat bg-cover overflow-y-hidden'>
         <Main />
         <NextScript />
       </body>
