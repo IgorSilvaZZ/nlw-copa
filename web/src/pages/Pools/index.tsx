@@ -24,7 +24,7 @@ export default function Pools() {
 
       const { data } = await api.get("/pools");
 
-      setPools(data);
+      setPools(data.pools);
     } catch (error) {
       console.error(error);
       toast.error("Não foi possivel carregar os Bolões!");
@@ -49,7 +49,10 @@ export default function Pools() {
     <MainContent>
       <Header title='Meus Bolões' />
       <SectionContent>
-        <Button text='Buscar Bolão por Código' />
+        <Button
+          text='Buscar Bolão por Código'
+          onClick={() => goToPage("/find")}
+        />
         <div className='w-full border border-solid border-[#323238]'></div>
         {pools && pools.length > 0 ? (
           <>
