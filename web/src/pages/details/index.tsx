@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { EmptyMyPoolList } from "../../components/EmptyMyPoolList";
+import { Footer } from "../../components/Footer";
 import { Guesses } from "../../components/Guesses";
 
 import { Header } from "../../components/Header";
@@ -17,36 +18,40 @@ export default function Details() {
   );
 
   const [poolDetails, setPoolDetails] = useState<IPoolCardProps>(
-    pool as IPoolCardProps
+    {} as IPoolCardProps
   );
 
   return (
     <MainContent>
       <Header title='Bolão do Rodrigão' />
 
-      {poolDetails._count?.participants > 0 ? (
-        <SectionContent>
-          <PoolHeader data={pool} />
+      <SectionContent>
+        <PoolHeader data={pool} />
 
-          <div className='flex gap-1 bg-gray-800 p-1 rounded-sm mb-5 w-full'>
-            <Option
-              title='Seus Palpites'
-              isSelected={optionSelected === "guesses"}
-              onClick={() => setOptionSelected("guesses")}
-            />
+        {poolDetails._count?.participants > 0 ? (
+          <>
+            <div className='flex gap-1 bg-gray-800 p-1 rounded-sm mb-5 w-full'>
+              <Option
+                title='Seus Palpites'
+                isSelected={optionSelected === "guesses"}
+                onClick={() => setOptionSelected("guesses")}
+              />
 
-            <Option
-              title='Ranking do Grupo'
-              isSelected={optionSelected === "ranking"}
-              onClick={() => setOptionSelected("ranking")}
-            />
+              <Option
+                title='Ranking do Grupo'
+                isSelected={optionSelected === "ranking"}
+                onClick={() => setOptionSelected("ranking")}
+              />
+            </div>
 
             <Guesses poolId={poolDetails.id} code={poolDetails.code} />
-          </div>
-        </SectionContent>
-      ) : (
-        <EmptyMyPoolList code={poolDetails.code} />
-      )}
+          </>
+        ) : (
+          <EmptyMyPoolList code={poolDetails.code} />
+        )}
+      </SectionContent>
+
+      <Footer />
     </MainContent>
   );
 }

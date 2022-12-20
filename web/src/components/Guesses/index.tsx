@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { EmptyMyPoolList } from "../EmptyMyPoolList";
 import { Game, IGameProps } from "../Game";
+import { games as gamesMock } from "../../utils/mocks/games";
 
 interface IGuessesProps {
   poolId: string;

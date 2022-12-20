@@ -19,7 +19,7 @@ export interface IGuessProps {
 export interface IGameProps {
   id: string;
   firstTeamCountryCode: string;
-  secondTeamCountryCode: string;
+  secundTeamCountryCode: string;
   guess: null | IGuessProps;
   date: string;
 }
@@ -39,29 +39,28 @@ export const Game = ({
 }: IGameComponentProps) => {
   const when = dayjs(data.date)
     .locale(ptBR)
-    .format("DD [de] YYYY [ás] HH:00[h]");
+    .format("DD [de] MMMM [de] YYYY [ás] HH:00[h]");
 
   return (
     <div className='flex flex-col items-center w-full bg-gray-800 rounded-sm border-b-2 border-b-yellow-500 mb-4 p-4'>
-      <span className='text-gray-100 text-2xl'>
-        {getName(data.firstTeamCountryCode)}
-        vs. <br />
-        {getName(data.secondTeamCountryCode)}
+      <span className='text-gray-100 text-lg'>
+        <span>{getName(data.firstTeamCountryCode)}</span> vs.{" "}
+        <span>{getName(data.secundTeamCountryCode)}</span>
       </span>
 
-      <span className='text-gray-200 text-2xl'>{when}</span>
+      <span className='text-gray-200 text-base'>{when}</span>
 
-      <div className='flex w-full justify-center items-center mt-4'>
+      <div className='flex w-full justify-around items-center mt-4'>
         <Team
           code={data.firstTeamCountryCode}
           position='right'
           onChangeText={setFirstTeamPoints}
         />
 
-        <X className='text-gray-300' size={8} />
+        <X className='text-gray-300' size={24} />
 
         <Team
-          code={data.secondTeamCountryCode}
+          code={data.secundTeamCountryCode}
           position='left'
           onChangeText={setSecondTeamPoints}
         />
@@ -69,12 +68,12 @@ export const Game = ({
 
       {!data.guess && (
         <button
-          className='w-full p-3 flex items-center justify-center gap-2 rounded uppercase font-semibold bg-green-500 mt-4'
+          className='w-[600px] p-3 flex items-center justify-center gap-2 rounded uppercase font-semibold bg-green-500 mt-4'
           onClick={onGuessConfirm}
         >
-          <span className='text-white text-2xl mr-3'>CONFIRMAR PALPITE</span>
+          <span className='text-white text-sm mr-3'>CONFIRMAR PALPITE</span>
 
-          <Check className='text-white' size={4} />
+          <Check className='text-white' size={24} />
         </button>
       )}
     </div>

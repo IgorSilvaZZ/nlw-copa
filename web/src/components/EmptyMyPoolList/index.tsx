@@ -8,23 +8,23 @@ export const EmptyMyPoolList = ({ code }: IEmptyMyPoolList) => {
   const router = useRouter();
 
   return (
-    <div className='flex flex-wrap justify-center p-4'>
-      <span className='text-gray-200 text-2xl text-center'>
-        Esse bolão ainda não tem participantes, que tall
+    <div className='flex flex-wrap justify-center p-4 text-2xl text-gray-200'>
+      <span className='text-center'>
+        Esse bolão ainda não tem participantes, que tal
       </span>
 
       <span
-        className='underline text-yellow-500'
+        className='underline text-yellow-500 cursor-pointer'
         onClick={() => router.push("/find")}
       >
         compartilhar o código
       </span>
 
-      <span className='text-gray-200 text-2xl mx-1'>do bolão com alguém?</span>
+      <span className='mx-1'>do bolão com alguém?</span>
 
-      <span className='text-gray-200 mr-1'>Use o código</span>
+      <span className='mr-1'>Use o código</span>
 
-      <span className='text-gray-200 text-2xl text-center'>{code}</span>
+      <span className='font-medium text-center'>{code}</span>
     </div>
   );
 };

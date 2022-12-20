@@ -153,13 +153,13 @@ export const pool = {
   ownerId: "f671ab97-2a32-4f9b-bb06-bad145525735",
   createdAt: String(new Date()),
   _count: {
-    participants: 1,
+    participants: 0,
   },
   owner: {
     name: "Igor Silva",
   },
   participants: [
-    {
+    /* {
       id: "4b0202c3-324b-48e3-9cdd-d2cc5835bb2a",
       user: {
         avatarUrl: "https://avatars.githubusercontent.com/u/65422544?v=4",
@@ -172,6 +172,6 @@ export const pool = {
         avatarUrl: "https://avatars.githubusercontent.com/u/2254731?v=4",
         name: "Diego Fernandez",
       },
-    },
+    }, */
   ],
 };
