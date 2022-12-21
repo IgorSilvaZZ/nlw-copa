@@ -1,4 +1,6 @@
-interface IInputProps extends React.HTMLAttributes<HTMLInputElement> {}
+import { InputHTMLAttributes } from "react";
+
+interface IInputProps extends InputHTMLAttributes<HTMLInputElement> {}
 
 export const Input = ({ ...rest }: IInputProps) => {
   return (

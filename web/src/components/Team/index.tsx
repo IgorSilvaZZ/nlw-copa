@@ -5,11 +5,17 @@ import { Input } from "../Input";
 
 interface ITeamProps {
   code: string;
+  defaultValue: string;
   position: "left" | "right";
   onChangeText: (e: FormEvent<HTMLInputElement>) => void;
 }
 
-export const Team = ({ code, position, onChangeText }: ITeamProps) => {
+export const Team = ({
+  code,
+  position,
+  defaultValue,
+  onChangeText,
+}: ITeamProps) => {
   return (
     <div className='flex items-center'>
       {position === "left" && (
@@ -21,8 +27,10 @@ export const Team = ({ code, position, onChangeText }: ITeamProps) => {
       )}
 
       <Input
-        className='w-12 h-10 px-4 font-medium text-xs rounded text-center bg-gray-600 border-gray-600 text-white placeholder-gray-30 focus:bg-gray-800 focus:border-gray-600'
+        className='w-12 h-10 px-4 font-medium text-xs rounded text-center bg-gray-600 border-gray-600 text-white placeholder-gray-30 focus:bg-gray-800 focus:border-gray-600 disabled:opacity-50'
         onChange={onChangeText}
+        defaultValue={defaultValue}
+        disabled={defaultValue !== ""}
       />
 
       {position == "right" && (

@@ -5,7 +5,6 @@ import ptBR from "dayjs/locale/pt-br";
 import { X, Check } from "phosphor-react";
 
 import { Team } from "../Team";
-import { Button } from "../Button";
 
 export interface IGuessProps {
   id: string;
@@ -55,6 +54,7 @@ export const Game = ({
           code={data.firstTeamCountryCode}
           position='right'
           onChangeText={setFirstTeamPoints}
+          defaultValue={data.guess ? String(data.guess.firstTeamPoints) : ""}
         />
 
         <X className='text-gray-300' size={24} />
@@ -63,6 +63,7 @@ export const Game = ({
           code={data.secundTeamCountryCode}
           position='left'
           onChangeText={setSecondTeamPoints}
+          defaultValue={data.guess ? String(data.guess.secondTeamPoints) : ""}
         />
       </div>
 

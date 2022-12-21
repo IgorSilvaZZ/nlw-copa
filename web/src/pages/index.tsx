@@ -20,31 +20,6 @@ interface HomeProps {
 export default function Home({ poolCount, guessCount, userCount }: HomeProps) {
   const { signIn } = useAuth();
 
-  const [poolTitle, setPoolTitle] = useState("");
-
-  async function createPool(e: FormEvent) {
-    e.preventDefault();
-
-    try {
-      const { data } = await api.post("/pools", {
-        title: poolTitle,
-      });
-
-      const code = data.code;
-
-      await navigator.clipboard.writeText(code);
-
-      alert(
-        "Bolão criado com sucesso! O codigo foi copiado para area de transferencia!"
-      );
-
-      setPoolTitle("");
-    } catch (error) {
-      console.log(error);
-      alert("Falha ao criar o bolão, tente novamente!");
-    }
-  }
-
   return (
     <div className='max-w-[1124px] h-screen mx-auto grid grid-cols-2 gap-28 items-center'>
       <main>

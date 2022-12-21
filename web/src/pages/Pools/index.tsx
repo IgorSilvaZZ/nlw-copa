@@ -8,9 +8,10 @@ import { Button } from "../../components/Button";
 import { Loading } from "../../components/Loading";
 import { MainContent } from "../../components/MainContent";
 import { IPoolCardProps, PoolCard } from "../../components/PoolCard";
+import { SectionContent } from "../../components/SectionContent";
+import { EmptyPoolList } from "../../components/EmptyPoolList";
 
 import { api } from "../../lib/axios";
-import { SectionContent } from "../../components/SectionContent";
 
 export default function Pools() {
   const navigate = useRouter();
@@ -42,7 +43,13 @@ export default function Pools() {
   }, []);
 
   if (loading) {
-    return <Loading />;
+    return (
+      <MainContent>
+        <div className='flex w-full h-full items-center justify-center'>
+          <Loading />
+        </div>
+      </MainContent>
+    );
   }
 
   return (
@@ -60,30 +67,12 @@ export default function Pools() {
               <PoolCard
                 key={pool.id}
                 data={pool}
-                onClick={() => console.log(pool.id)}
+                onClick={() => navigate.push(`/details/${pool.id}`)}
               />
             ))}
           </>
         ) : (
-          <>
-            <span className='w-full text-center text-2xl text-white'>
-              Você ainda não está participando de <br /> nenhum bolão, que tal{" "}
-              <span
-                className='text-yellow-500 cursor-pointer transitions-colors'
-                onClick={() => goToPage("/find")}
-              >
-                buscar um por código
-              </span>
-              <br />
-              ou{" "}
-              <span
-                className='text-yellow-500 cursor-pointer transitions-colors'
-                onClick={() => goToPage("/new")}
-              >
-                criar um novo?
-              </span>
-            </span>
-          </>
+          <EmptyPoolList />
         )}
       </SectionContent>
       <Footer />
