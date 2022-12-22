@@ -1,11 +1,15 @@
 import { useRouter } from "next/router";
-import { PlusCircle, SoccerBall } from "phosphor-react";
+import { PlusCircle, SoccerBall, SignOut } from "phosphor-react";
 import classnames from "classnames";
 
-export const Footer = () => {
-  const router = useRouter();
+import { useAuth } from "../../hooks/useAuth";
 
-  const routePathNameFormatter = router?.pathname.replace("/", "");
+export const Footer = () => {
+  const { logout } = useAuth();
+
+  const navigate = useRouter();
+
+  const routePathNameFormatter = navigate?.pathname.replace("/", "");
 
   const isRouteNew = routePathNameFormatter === "new";
   const isRoutePools = ["pools", "find", "details"].includes(
@@ -21,7 +25,7 @@ export const Footer = () => {
         })}
       >
         <PlusCircle />
-        <span onClick={() => router.push("/new")}>Novo Bolão</span>
+        <span onClick={() => navigate.push("/new")}>Novo Bolão</span>
       </button>
       <button
         className={classnames("flex items-center gap-2", {
@@ -30,7 +34,13 @@ export const Footer = () => {
         })}
       >
         <SoccerBall />
-        <span onClick={() => router.push("/pools")}>Meus Bolões</span>
+        <span onClick={() => navigate.push("/pools")}>Meus Bolões</span>
+      </button>
+
+      <button className='flex items-center gap-2 text-gray-500'>
+        <SignOut onClick={() => logout()} />
+
+        <span>Sair</span>
       </button>
     </div>
   );

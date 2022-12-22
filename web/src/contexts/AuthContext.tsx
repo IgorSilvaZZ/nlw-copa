@@ -14,6 +14,7 @@ export interface IAuthContextProps {
   isUserLogged: boolean;
   user: IUser;
   signIn: () => void;
+  logout: () => void;
 }
 
 interface IAuthProviderProps {
@@ -25,7 +26,7 @@ export const AuthContext = createContext({} as IAuthContextProps);
 export const AuthContextProvider = ({ children }: IAuthProviderProps) => {
   const [user, setUser] = useState<IUser>({} as IUser);
 
-  const router = useRouter();
+  const navigate = useRouter();
 
   const signIn = useGoogleLogin({
     onSuccess: async (tokenResponse) => {
@@ -56,7 +57,7 @@ export const AuthContextProvider = ({ children }: IAuthProviderProps) => {
 
       setUser(userStorage);
     } else {
-      router.push("/");
+      navigate.push("/");
     }
   }
 
@@ -83,10 +84,18 @@ export const AuthContextProvider = ({ children }: IAuthProviderProps) => {
 
       setUser(userInfo);
 
-      router.push("/pools");
+      navigate.push("/pools");
     } catch (error) {
       console.log(error);
     }
+  }
+
+  function logout() {
+    setUser({} as IUser);
+
+    localStorage.clear();
+
+    navigate.push("/");
   }
 
   useEffect(() => {
@@ -99,6 +108,7 @@ export const AuthContextProvider = ({ children }: IAuthProviderProps) => {
         isUserLogged: !!user,
         user,
         signIn,
+        logout,
       }}
     >
       {children}
