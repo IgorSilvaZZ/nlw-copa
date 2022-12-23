@@ -29,22 +29,23 @@ Durante a semana de Next Level Week foi desenvolvida uma aplicação de bolões 
 
 <h1>Algumas Imagens do projeto</h1>
 
+**[Link Figma](<https://www.figma.com/file/03nYmsX9H9rb2uvZV5MFb7/Bol%C3%A3o-da-Copa-(Community)?node-id=0%3A1&t=saqPLqqckcBZlye2-1>)**
+
 **Mobile (React Native)**:
 
-<div style="display: flex; gap: 10px; align-items: center; justify-content: center; margin-bottom: 50px;">
+<div align="center" style="margin-bottom: 50px;">
     <img src="./images/login-mobile.jpeg" width='200px' /> 
     <img src="./images/pools-mobile.jpeg" width='200px' /> 
     <img src="./images/find-pools-mobile.jpeg" width='200px' /> 
-    <img src="./images/details-pool-mobile.jpeg" width='200px' /> 
-    <img src="./images/create-pool-mobile.jpeg" width='200px' /> 
+    <img src="./images/details-pool-mobile.jpeg" width='200px' />
 </div>
 
 **Web (NextJS) (para mais imagens vá na pasta images que esta na raiz)** :
 
-<div style="display: flex; gap: 10px; align-items: center; justify-content: center; margin-bottom: 10px;">
-    <img src="./images/login-web.jpeg" width='480px' /> 
-    <img src="./images/pools-web.jpeg" width='480px' /> 
-    <img src="./images/details-1-web.jpeg" width='480px' /> 
+<div align="center" style="margin-bottom: 10px;">
+    <img src="./images/login-web.jpeg" width='380px' /> 
+    <img src="./images/pools-web.jpeg" width='380px' /> 
+    <img src="./images/details-1-web.jpeg" width='380px' /> 
 </div>
 
 <br>
