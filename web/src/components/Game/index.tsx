@@ -67,7 +67,7 @@ export const Game = ({
         />
       </div>
 
-      {!data.guess && (
+      {!data.guess && dayjs(new Date()).isBefore(data.date) && (
         <button
           className='w-[600px] p-3 flex items-center justify-center gap-2 rounded uppercase font-semibold bg-green-500 mt-4'
           onClick={onGuessConfirm}

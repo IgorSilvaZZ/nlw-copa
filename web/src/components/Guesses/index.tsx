@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { AxiosError } from "axios";
 import { toast } from "react-toastify";
 import { api } from "../../lib/axios";
 
@@ -49,7 +50,16 @@ export const Guesses = ({ code, poolId }: IGuessesProps) => {
 
       getGames();
     } catch (error) {
-      console.error(error);
+      if (error instanceof AxiosError) {
+        if (
+          error.response?.data?.message ===
+          "You cannot send guesses after the game date"
+        ) {
+          toast.error("Você não pode palpitar em um jogo que já passou!");
+        } else {
+          console.error("Unexpected error", error);
+        }
+      }
 
       toast.error("Não foi possivel enviar o palpite!");
     }
