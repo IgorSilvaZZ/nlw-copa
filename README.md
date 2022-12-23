@@ -33,19 +33,19 @@ Durante a semana de Next Level Week foi desenvolvida uma aplicação de bolões 
 
 **Mobile (React Native)**:
 
-<div align="center" style="margin-bottom: 50px;">
+<div align="center">
     <img src="./images/login-mobile.jpeg" width='200px' /> 
     <img src="./images/pools-mobile.jpeg" width='200px' /> 
     <img src="./images/find-pools-mobile.jpeg" width='200px' /> 
     <img src="./images/details-pool-mobile.jpeg" width='200px' />
 </div>
 
+<br>
+
 **Web (NextJS) (para mais imagens vá na pasta images que esta na raiz)** :
 
-<div align="center" style="margin-bottom: 10px;">
-    <img src="./images/login-web.jpeg" width='380px' /> 
-    <img src="./images/pools-web.jpeg" width='380px' /> 
-    <img src="./images/details-1-web.jpeg" width='380px' /> 
+<div align="center">
+    <img src="./images/login-web.jpeg" /> 
 </div>
 
 <br>
